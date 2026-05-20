@@ -1,4 +1,30 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Kampf's Fry Toss</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
+      background: #1A0A2E;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      touch-action: manipulation;
+    }
+    #scale-wrapper {
+      width: 380px;
+      transform-origin: top center;
+    }
+  </style>
+</head>
+<body>
+<div id="scale-wrapper">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   #gw {
@@ -99,7 +125,6 @@
   }
   #modal-close:hover { background: #ffd84d; }
 </style>
-
 
 <div id="gw" style="position:relative;">
   <div id="modal-overlay">
@@ -418,3 +443,18 @@ document.getElementById('rbtn').addEventListener('click', () => {
 
 loop();
 </script>
+</div>
+<script>
+  function scaleGame() {
+    const wrapper = document.getElementById('scale-wrapper');
+    const scaleX = window.innerWidth / 380;
+    const scaleY = window.innerHeight / wrapper.offsetHeight;
+    const scale = Math.min(scaleX, scaleY);
+    wrapper.style.transform = 'scale(' + scale + ')';
+    wrapper.style.marginTop = Math.max(0, (window.innerHeight - wrapper.offsetHeight * scale) / 2) + 'px';
+  }
+  window.addEventListener('load', scaleGame);
+  window.addEventListener('resize', scaleGame);
+</script>
+</body>
+</html>
